@@ -4,10 +4,12 @@ Parser for sadf/sar output into Pandas Dataframes
 
 python-sadf provides a simple way to create system utilisation reports using sysstat and the Pandas api.
 
+
 Example
 =======
 
 ::
+
     import sadf
     from sadf import fieldgroups as fg
 
