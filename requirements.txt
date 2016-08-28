@@ -1,0 +1,6 @@
+dateparser>=0.4.0
+pandas>=0.18.1
+pytz>=2016.6.1
+simplejson>=3.8.2
+six>=1.10.0
+tzlocal>=1.2.2
