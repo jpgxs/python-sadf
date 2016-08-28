@@ -19,7 +19,7 @@ except ImportError:
 from sadf import fieldgroups
 
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 class SadfCommandException(Exception):
