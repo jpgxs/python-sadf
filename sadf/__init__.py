@@ -19,6 +19,9 @@ except ImportError:
 from sadf import fieldgroups
 
 
+__version__ = '0.1.0'
+
+
 class SadfCommandException(Exception):
     pass
 
@@ -234,11 +237,11 @@ class SadfCommand(object):
         stdout, stderr = proc.communicate()
         if stderr:
             raise SadfCommandException('Failed to execute sadf command: {}'
-                                       .format(stderr.decode('utf-8')))
+                                       .format(stderr.decode()))
         try:
-            cmd_output = json.loads(stdout)
+            cmd_output = json.loads(stdout.decode())
         except ValueError as e:
             raise SadfCommandException('Invalid JSON returned by sadf: {}'
-                                       .format(stdout.decode('utf-8')))
+                                       .format(stdout.decode()))
 
-        return stdout
+        return cmd_output
