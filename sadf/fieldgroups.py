@@ -130,15 +130,15 @@ class Network(FieldGroup):
 
         def parse_datapoint(self, datapoint):
             for iface in datapoint:
-                if iface not in self.datapoints:
-                    self.datapoints[iface] = []
-
                 iface_name = iface.pop('iface')
+                if iface_name not in self.datapoints:
+                    self.datapoints[iface_name] = []
+
 
                 if not self.columns:
                     self.columns = sorted(iface)
 
-                self.datapoints[iface].append([
+                self.datapoints[iface_name].append([
                     iface[k] for k in self.columns
                 ])
 
@@ -165,22 +165,38 @@ class Network(FieldGroup):
 
         self.sub_groups = []
         self.sar_cmd = ['-n']
+        self.keywords = []
         self.datapoints = {}
 
         if dev:
             self.sub_groups.append(self.Dev())
+            self.keywords.append('DEV')
 
         if edev:
             self.sub_groups.append(self.EDev())
+            self.keywords.append('EDEV')
 
         if nfs:
             self.sub_groups.append(self.NFS())
+            self.keywords.append('NFS')
 
         if nfsd:
             self.sub_groups.append(self.NFSD())
+            self.keywords.append('NFSD')
 
         if sock:
             self.sub_groups.append(self.Sock())
+            self.keywords.append('SOCK')
+
+        if len(self.keywords) == 0:
+            self.keywords.append('ALL')
+            self.sub_groups.append(self.Dev())
+            self.sub_groups.append(self.EDev())
+            self.sub_groups.append(self.NFS())
+            self.sub_groups.append(self.NFSD())
+            self.sub_groups.append(self.Sock())
+
+        self.sar_cmd.append(','.join(self.keywords))
 
     def parse_datapoint(self, datapoint):
         for group in self.sub_groups:
