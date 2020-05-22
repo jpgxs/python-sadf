@@ -1,25 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import subprocess
 import datetime
-import pytz
+import subprocess
 
 import dateparser
-import tzlocal
-import six
-
 import pandas as pd
-
-try:
-    import simplejson as json
-except ImportError:
-    import json
+import pytz
+import simplejson as json
+import six
+import tzlocal
 
 from sadf import fieldgroups
 
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 
 class SadfCommandException(Exception):
@@ -153,8 +148,7 @@ class SadfCommand(object):
 
         return SadfReport(host, self.field_groups)
 
-    @staticmethod
-    def _cvt_to_time(time):
+    def _cvt_to_time(self, time):
         if isinstance(time, datetime.time):
             # Convert to a datetime in UTC
             return datetime.datetime.strptime(
@@ -242,11 +236,11 @@ class SadfCommand(object):
         stdout, stderr = proc.communicate()
         if stderr:
             raise SadfCommandException('Failed to execute sadf command: {}'
-                                       .format(stderr.decode()))
+                                       .format(stderr.decode('utf-8')))
         try:
             cmd_output = json.loads(stdout.decode())
-        except ValueError as e:
+        except ValueError:
             raise SadfCommandException('Invalid JSON returned by sadf: {}'
-                                       .format(stdout.decode()))
+                                       .format(stdout.decode('utf-8')))
 
         return cmd_output

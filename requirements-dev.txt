@@ -1,0 +1,6 @@
+pytest
+pytest-mock
+pytest-coverage
+coverage~=4.0
+flake8
+mccabe

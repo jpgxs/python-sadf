@@ -134,7 +134,6 @@ class Network(FieldGroup):
                 if iface_name not in self.datapoints:
                     self.datapoints[iface_name] = []
 
-
                 if not self.columns:
                     self.columns = sorted(iface)
 

@@ -3,7 +3,6 @@
 
 import codecs
 import re
-import sys
 
 try:
     from setuptools import setup
@@ -22,7 +21,7 @@ setup(
     name='sadf',
     version=get_version(),
     author='Joshua Griffiths',
-    author_email='jgriffiths@ceramyq.com',
+    author_email='jgriffiths@x86-64.io',
     url='http://github.com/jpgxs/python-sadf',
     description='Parse sysstat (sa/sar) output into Pandas Dataframes',
     long_description=codecs.open('README.rst', encoding='utf-8').read(),
@@ -32,6 +31,7 @@ setup(
         'pytz',
         'six>=1.0.0',
         'tzlocal>=1.0.0',
+        'simplejson',
     ],
     packages=['sadf'],
     platforms=['POSIX'],

@@ -38,7 +38,7 @@ Example
 Author
 ======
 
-Joshua Griffiths <jgriffiths@ceramyq.com>
+Joshua Griffiths <jgriffiths@x86-64.io>
 
 License
 =======
