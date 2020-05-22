@@ -208,7 +208,7 @@ class SadfCommand(object):
         localtime = self.end_time.astimezone(self._local_tz)
         return localtime.strftime(self._time_fmt)
 
-    def _exec(self):
+    def _build_command(self):
         command = [self._sadf, '-j']
 
         if self.start_time:
@@ -228,6 +228,11 @@ class SadfCommand(object):
 
         for group in self.field_groups:
             command += group.sar_cmd
+
+        return command
+
+    def _exec(self):
+        command = self._build_command()
 
         proc = subprocess.Popen(command,
                                 env=self._command_env,
